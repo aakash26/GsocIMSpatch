@@ -1,4 +1,7 @@
+''' Source : http://www.esrf.eu/computing/cs/tango/tango_doc/kernel_doc/pytango/latest/quicktour.html'''
+
 import PyTango
+
 
 dev_info = PyTango.DbDevInfo()
 dev_info.server = "PowerSupplyDS/test"
