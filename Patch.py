@@ -1,7 +1,6 @@
-"""
-A trasnparent PyQt4 GUI which is able to read attributes from PowerSupply Device Server on Tango and write aswell
-
-"""
+# Every Qt application must have one and only one QApplication object;
+# it receives the command line arguments passed to the script, as they
+# can be used to customize the application's appearance and behavior
 import sys  
 from PyQt4.QtGui import *  
 from PyQt4 import QtCore  
@@ -22,10 +21,15 @@ class TangoDevice(QWidget):
         power_supply.current=float(self.currwrite)
     #to turnon the device
     def turon(self):
+        
         power_supply.TurnOn()
+        self.state.setPlaceholderText(str(power_supply.state()))
     #to turnoff the device 
     def turnoff(self):
+        
+       
         power_supply.TurnOff()
+        self.state.setPlaceholderText(str(power_supply.state()))
     def valueread(self):
         self.currattribute= self.attribute.currentText()#to get the attribute selected by user in the dropdown.
         if(self.currattribute=="Current"):
@@ -73,22 +77,29 @@ class TangoDevice(QWidget):
         # Same width as the attribute
         self.value.setMinimumWidth(285)
         self.value.move(110, 130)
+        self.state_lbl = QLabel('Device State:', self)
+        self.state_lbl.move(10, 200)
+        self.state =QLineEdit(self)
+        self.state.setPlaceholderText(str(power_supply.state()))
+        self.state.setMinimumWidth(285)
+        self.state.move(110,200)
 
-	#the write label and write control which is an entry textbox
+    #the write label and write control which is an entry textbox
         self.write_lbl = QLabel('Write Current :',self)
         self.write_lbl.move(5,170)
         self.write =QLineEdit(self)
         self.write.setPlaceholderText("enter value")
         self.write.setMinimumWidth(285)
         self.write.move(110,170)
-        self.write_button = QPushButton('Write Current', self)
+        
  
         #write button with clicked.connect function to create an Onclick event to the writevalue function.
+        self.write_button = QPushButton('Write Current', self)
         self.write_button.setMinimumWidth(145)
         self.write_button.move(350, 170)
         self.write_button.clicked.connect(self.writevalue) # connect to writevalue()
- 	
-	#on and off button to turn the device on and off
+    
+    #on and off button to turn the device on and off
         self.on_button = QPushButton('Turn Device On', self)
         self.off_button = QPushButton('Turn Device off', self) 
         self.on_button.setMinimumWidth(50)
@@ -107,6 +118,7 @@ class TangoDevice(QWidget):
         self.read_button.clicked.connect(self.valueread)
     
     def run(self):
+        # Show the form
         self.show()
         # Run the Qt application
         qt_app.exec_()
