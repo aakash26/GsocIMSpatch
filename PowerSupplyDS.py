@@ -1,4 +1,4 @@
-
+""" Source : http://www.esrf.eu/computing/cs/tango/tango_doc/kernel_doc/pytango/latest/quicktour.html"""
 """Demo power supply tango device server"""
 
 import time
