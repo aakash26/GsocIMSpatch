@@ -1,6 +1,7 @@
-# Every Qt application must have one and only one QApplication object;
-# it receives the command line arguments passed to the script, as they
-# can be used to customize the application's appearance and behavior
+"""
+A trasnparent PyQt4 GUI which is able to read attributes from PowerSupply Device Server on Tango and write aswell
+
+"""
 import sys  
 from PyQt4.QtGui import *  
 from PyQt4 import QtCore  
@@ -43,7 +44,7 @@ class TangoDevice(QWidget):
         self.setWindowOpacity(0.8)
         # We have to set the size of the main window
         self.setMinimumSize(600, 400)
-        self.setWindowTitle('TangoDeivie')
+        self.setWindowTitle('TangoDevice')
         self.greeting_lbl = QLabel('Please choose the attribute to read from the Power Supply Device Server:', self)
         # Create the controls with this object as their parent and set
         # their position individually; each row is a label followed by
@@ -106,7 +107,6 @@ class TangoDevice(QWidget):
         self.read_button.clicked.connect(self.valueread)
     
     def run(self):
-        # Show the form
         self.show()
         # Run the Qt application
         qt_app.exec_()
